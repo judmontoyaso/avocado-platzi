@@ -5,12 +5,20 @@ import styles from '../styles/Home.module.css'
 
 
 export default function Home() {
+  const [producList, setProducList] = useState([])
 
-u
+useEffect(() => {
+  window.fetch('/api/avo').then(response => response.json()).then(({data, legth}) =>{
+    setProducList(data)
+  })
+}, [])
 
 
-const [producList, setProducList] = useState([])
   return (
-    <>HolaMundo</>
+    <>{
+      producList.map((product) =>(
+        <div>{product.name}</div>
+      ))
+    }</>
   )
 }
