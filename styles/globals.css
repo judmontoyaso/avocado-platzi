@@ -93,18 +93,51 @@ a{
   text-decoration: none!important;
 }
 
+.navbar{
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.p-inputtext:enabled:focus {
+  outline: 0 none!important;
+  outline-offset: 0!important;
+  box-shadow: 0 0 0 0.2rem #c3f7e84a!important;
+  border-color: #31ad7ab3!important;
+}
+.p-inputtext:enabled:hover {
+  border-color: #47cf85ad!important;
+}
 .navbar .card{
   display: flex;
   align-items: center;
   align-content: center!important;
 justify-content: space-between!important;
-padding: 5px 3rem;}
+padding: 5px 3rem;
+}
 
 .contenedor-cards{
   display: flex;
   flex-direction: row;
 flex-wrap:wrap ;
 justify-content: center;
+}
+
+.contenedor-producto{
+  display: flex!important;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin-top: 3rem;
+}
+
+.contenedor-imagen-titulo{
+  display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.contenedor-hijo-producto{
+  width: 50%;
 }
 
 .card-avo{
@@ -138,4 +171,16 @@ justify-content: center;
 }
 .avo-price{
   padding: 10px;
+}
+
+.container-loading{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.container-loading div{
+  display: flex;
+  
 }
