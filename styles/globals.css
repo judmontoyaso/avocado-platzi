@@ -89,7 +89,9 @@ body {
 
 
   
-
+a{
+  text-decoration: none!important;
+}
 
 .navbar .card{
   display: flex;
@@ -97,3 +99,24 @@ body {
   align-content: center!important;
 justify-content: space-between!important;
 padding: 5px 3rem;}
+
+.contenedor-cards{
+  display: flex;
+  flex-direction: row;
+flex-wrap:wrap ;
+justify-content: center;
+}
+
+.card-avo{
+  width: auto;
+  border: solid 1px gray;
+  margin: 30px;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.card-avo:hover{
+ 
+  transform: scale(1.01);
+  transition: all 300ms;
+}
