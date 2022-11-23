@@ -35,11 +35,6 @@ type TAPIAvoResponse = {
   error?: string
 }
 type productContext ={
-  id: TProductId
-  name: string
-  sku: string
-  price: number
-  image: Url
-  attributes: TProductAttributes
+  product: TProduct
   cantidad : number
 }

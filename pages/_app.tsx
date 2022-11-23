@@ -10,9 +10,9 @@ import { useReducer, useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  const [add, setAdd] =  useState({});
+  const [add, setAdd] =  useState<productContext[]>();
   return (
-<ProductContext.Provider value={ [add, setAdd]}>
+<ProductContext.Provider value={[add, setAdd] }>
   <Layout>
   <Component {...pageProps} />
   </Layout>

@@ -10,6 +10,10 @@ const ProductItem = () => {
     query: { id },
   } = useRouter();
 
+  const[context, setContext] = useProduct();
+  
+  console.log(context)
+
   const [product, setProduct] = useState({
     name: "",
     price: "",
