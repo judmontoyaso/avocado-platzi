@@ -1,7 +1,8 @@
+import { useProduct } from "context/Produtcs";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 
 export default function Home() {
@@ -11,16 +12,31 @@ export default function Home() {
 
   const [loading, setLoading] = useState(true);
 
+  const [av, setAv] = useState()
+
+  const [add, setAdd] =  useState([]);
+
+
+useEffect(() =>{
+  console.log(add)
+}
+)
+
+
+
   useEffect(() => {
     window
-      .fetch("/api/avo")
-      .then((response) => response.json())
-      .then(({ data, legth }) => {
-        setProducList(data);
-        setLoading(false);
-      });
+    .fetch("/api/avo")
+    .then((response) => response.json())
+    .then(({ data, legth }) => {
+      setProducList(data);
+      setLoading(false);
+      
+    });
   }, []);
+  
 
+    
   return (
     <>
       {loading ? (
@@ -36,6 +52,7 @@ export default function Home() {
       ) : (
         <div className="contenedor-cards">
           {producList.map((avo) => (
+            <div>
             <Link key={avo.id} href={`product/${avo.id}`}>
               <div className="card-avo">
                 <div>
@@ -50,8 +67,11 @@ export default function Home() {
                 </div>
                 <div className="avo-name">{avo.name}</div>
                 <div className="avo-price">{avo.price}</div>
+
               </div>
             </Link>
+                <button className="avo-price" onClick={() => {setAdd([...add, {avo}])}}>add</button>
+                </div>
           ))}
         </div>
       )}

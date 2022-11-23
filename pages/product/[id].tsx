@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import data from "../../database/data";
 import Image from "next/image";
 import ReactLoading from "react-loading";
+import { useProduct } from "context/Produtcs";
 
 const ProductItem = () => {
   const {
@@ -19,6 +20,19 @@ const ProductItem = () => {
   });
 
   const [loading, setLoading] = useState(true);
+
+  
+  // const [add, setAdd] = useProduct({...{
+  //   name: "",
+  //   price: 0,
+  //   sku: "",
+  //   image: "",
+  //   id: "",
+  //   attributes: { description: "", taste: "", hardiness: "", shape: "" },
+  //   cantidad:0
+  // }});
+
+ 
 
   useEffect(() => {
     window
