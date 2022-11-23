@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import data from "../../database/data";
 import Image from "next/image";
 import ReactLoading from "react-loading";
+
 
 const ProductItem = () => {
   const {
@@ -20,6 +21,9 @@ const ProductItem = () => {
 
   const [loading, setLoading] = useState(true);
 
+  const [count, setCount] = useState(0);
+
+
   useEffect(() => {
     window
       .fetch(`/api/avo/${id}`)
@@ -30,6 +34,17 @@ const ProductItem = () => {
       });
   }, [id]);
   console.log(data);
+
+  const sum = function () {
+    setCount(count + 1);
+  };
+  const rest = function () {
+    !(count < 1) ? setCount(count - 1) : setCount(0);
+  };
+
+  const add = function () {
+    setProdtbuy([]);
+  };
   return (
     <>
       {loading ? (
@@ -53,9 +68,19 @@ const ProductItem = () => {
                 height={300}
               ></Image>
               <div>
-                <div>{product?.name}</div>
-                <div>$ {product?.price}</div>
+                <div>
+                  <h2>{product?.name}</h2>
+                </div>
                 <div>{product?.sku}</div>
+                <div>$ {product?.price}</div>
+                <div>
+                  <div>
+                    <input value={count}></input>{" "}
+                    <button onClick={sum}>Add</button>
+                    <button onClick={rest}>rest</button>
+                    <button onClick={add}>rest</button>
+                  </div>
+                </div>
               </div>
             </div>
             <div>

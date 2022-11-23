@@ -11,6 +11,7 @@ export default function Home() {
 
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
     window
       .fetch("/api/avo")
@@ -20,6 +21,7 @@ export default function Home() {
         setLoading(false);
       });
   }, []);
+
 
   return (
     <>
@@ -48,9 +50,11 @@ export default function Home() {
                     ></Image>
                   </div>
                 </div>
-                <div className="avo-name">{avo.name}</div>
-                <div className="avo-price">{avo.price}</div>
-              </div>
+                <div className="avo-name">
+                  <h3>{avo.name}</h3>
+                </div>
+                <div className="avo-price">$ {avo.price}</div>
+</div>
             </Link>
           ))}
         </div>
