@@ -9,26 +9,29 @@ import "primeicons/primeicons.css";
 import Link from "next/link";
 import { useProduct } from "context/Produtcs";
 import { useCantidad } from "context/cantdad";
+import { useProductsList } from "context/ProdutcsList";
 
 const Navbar = () => {
 
   const[context, setContext] = useProduct();
   const [productos, setProductos] = useState(0)
   const [cantidad, setcantidad] = useCantidad()
+  const [lista, setLista] = useProductsList()
 
+  console.log(lista)
 console.log(context)
 // console.log(context[0]?.length)
 
 let con = {}
 
 
+let product = 0
   useEffect(() =>{
- let product = 0
-    for (let i = 0 ; i < context?.length;i++){
-       product += context[i].product.cantidad
-       console.log(product)
+    for (let i = 0 ; i < lista.length;i++){
+       product += lista[i].cantidad != undefined ? lista[i]?.cantidad : 0
+
        setProductos(product)
-       console.log(productos)
+
        
      
        
@@ -36,20 +39,20 @@ let con = {}
         },[context])
 
   
-   console.log(productos)
+
       
   
 
  
 
   const end = (
-    <Link href={"/about"}>
+    <Link href={"/shopingCar"}>
       <div className="button-demo">
         <div className="template">
           <Button className="vimeo p-0" aria-label="Vimeo">
             <i className="pi pi-shopping-cart px-2"></i>
             <span className="px-3">Canasta</span>
-          <div className="px-3 number">{cantidad}</div>
+          <div className="px-3 number">{productos}</div>
       
           </Button>
         </div>
