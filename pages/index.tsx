@@ -29,6 +29,22 @@ export default function Home() {
     },
   ]);
 
+
+  const [productos, setProductos] = useState(0)
+
+  const sumprod = (context) =>{
+    var product = 0
+
+    for (var i = 0 ; i < context?.length;i++){
+      product = product + context[i].product?.cantidad
+      setProductos(product)
+ 
+      
+    }
+    console.log(productos)
+        }
+
+
   useEffect(() => {
     var cantidad = 0;
     window
@@ -51,25 +67,16 @@ export default function Home() {
 
   const [sum, setSum] = useState(1);
   const [rest, setRest] = useState([{}]);
-
+  
   console.log(add);
-  setContext(add);
+  
 
-  useEffect(() => {}, []);
+  useEffect(() => {sumprod(add)}, [add]);
 
   const op = (i) => {
     producList[i].cantidad =
       producList[i].cantidad == undefined ? 1 : producList[i].cantidad + 1;
     console.log(producList[i].cantidad);
-
-    // setRest([{product:producList[i]}])
-    // cant = cant + 1;
-
-    // // setAdd([{...add,  product: producList[i],cantidad: cant }])
-    // console.log(producList[i].cantidad);
-    // // setProducList([...producto[i], {name:cant}])
-    // var can = add[i]?.cantidad + 1;
-
     setSum(sum + 1);
   };
 
@@ -82,6 +89,12 @@ export default function Home() {
         : producList[i].cantidad - 1;
     console.log(producList[i].cantidad);
   };
+
+  // const add3 = (avo) =>{
+   
+ 
+ 
+  // }
 
   return (
     <>
@@ -137,20 +150,27 @@ export default function Home() {
               <button
                 className="avo-price"
                 onClick={() => {
+                 
+                  const search =  add.find(
+                    (element) => (element?.product?.id === avo?.id)
+                  );
+                
+              
+                  (
+                  search == undefined ? 
                   setAdd([
                     ...add,
                     {
-                      producto: {
+                      
                         product: avo,
-                        cantidad: producList[producList.indexOf(avo)].cantidad,
-                      },
-                    },
-                  ]),
-                    console.log(
-                      add?.find(
-                        (element) => (element.producto.product.id == "ewxsd6xb")
-                      )
-                    );
+                        
+                      
+                    }
+                  ]) :
+              
+                  search.product.cantidad = producList[producList.indexOf(avo)].cantidad > 1 ? avo.cantidad : 0);
+              
+                  
                 }}
               >
                 add

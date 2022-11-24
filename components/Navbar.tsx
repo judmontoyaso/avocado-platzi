@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Menubar } from "primereact/menubar";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
@@ -12,6 +12,32 @@ import { useProduct } from "context/Produtcs";
 const Navbar = () => {
 
   const[context, setContext] = useProduct();
+  const [productos, setProductos] = useState(0)
+console.log(context)
+// console.log(context[0]?.length)
+
+let con = {}
+
+
+  useEffect(() =>{
+ let product = 0
+    for (let i = 0 ; i < context?.length;i++){
+       product += context[i].product.cantidad
+       console.log(product)
+       setProductos(product)
+       console.log(productos)
+       
+     
+       
+      }
+        },[context])
+
+  
+   console.log(productos)
+      
+  
+
+ 
 
   const end = (
     <Link href={"/about"}>
@@ -20,7 +46,7 @@ const Navbar = () => {
           <Button className="vimeo p-0" aria-label="Vimeo">
             <i className="pi pi-shopping-cart px-2"></i>
             <span className="px-3">Canasta</span>
-          <div className="px-3 number">({context?.length})</div>
+          <div className="px-3 number">{productos}</div>
       
           </Button>
         </div>

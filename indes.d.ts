@@ -36,9 +36,9 @@ type TAPIAvoResponse = {
 }
 type productContext ={
 
-  producto:{
+ 
 
     product: TProduct
     cantidad : number
-  }
+  
 }
