@@ -8,11 +8,14 @@ import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
 import Link from "next/link";
 import { useProduct } from "context/Produtcs";
+import { useCantidad } from "context/cantdad";
 
 const Navbar = () => {
 
   const[context, setContext] = useProduct();
   const [productos, setProductos] = useState(0)
+  const [cantidad, setcantidad] = useCantidad()
+
 console.log(context)
 // console.log(context[0]?.length)
 
@@ -46,7 +49,7 @@ let con = {}
           <Button className="vimeo p-0" aria-label="Vimeo">
             <i className="pi pi-shopping-cart px-2"></i>
             <span className="px-3">Canasta</span>
-          <div className="px-3 number">{productos}</div>
+          <div className="px-3 number">{cantidad}</div>
       
           </Button>
         </div>

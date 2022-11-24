@@ -1,3 +1,4 @@
+import { useCantidad } from "context/cantdad";
 import { useProduct } from "context/Produtcs";
 import Head from "next/head";
 import Image from "next/image";
@@ -30,49 +31,38 @@ export default function Home() {
   ]);
 
 
-  const [productos, setProductos] = useState(0)
-
-  const sumprod = (context) =>{
-    var product = 0
-
-    for (var i = 0 ; i < context?.length;i++){
-      product = product + context[i].product?.cantidad
-      setProductos(product)
- 
-      
-    }
-    console.log(productos)
-        }
-
-
+  
+  
+  
+  
   useEffect(() => {
     var cantidad = 0;
     window
-      .fetch("/api/avo")
-      .then((response) => response.json())
-      .then(({ data, legth }) => {
-        setProducList(data);
-        setLoading(false);
-      });
-
+    .fetch("/api/avo")
+    .then((response) => response.json())
+    .then(({ data, legth }) => {
+      setProducList(data);
+      setLoading(false);
+    });
+    
     var cantidad = 0;
   }, []);
-
+  
   const [loading, setLoading] = useState(true);
-
+  
   const add2: productContext[] = [];
   const [add, setAdd] = useState<productContext[]>(add2);
 
   const [context, setContext] = useProduct();
-
+  
   const [sum, setSum] = useState(1);
   const [rest, setRest] = useState([{}]);
   
   console.log(add);
   
+  const [productos, setProductos] = useState(0)
 
-  useEffect(() => {sumprod(add)}, [add]);
-
+const [canti, setCanti] = useCantidad()
   const op = (i) => {
     producList[i].cantidad =
       producList[i].cantidad == undefined ? 1 : producList[i].cantidad + 1;
@@ -90,12 +80,61 @@ export default function Home() {
     console.log(producList[i].cantidad);
   };
 
-  // const add3 = (avo) =>{
-   
- 
- 
-  // }
+  const add3 = (avo) =>{
+    const search =  add.find(
+      (element) => (element?.product?.id === avo?.id)
+    );
 
+
+    (
+    search == undefined ?
+    setAdd([
+      ...add,
+      {
+
+          product: avo,
+          cantidad: producList[producList.indexOf(avo)]?.cantidad
+
+      }
+    ]) :
+
+    search.cantidad = producList[producList.indexOf(avo)]?.cantidad > 1 ? avo.cantidad : 0);
+
+    // setProductos(search?.cantidad)
+    //     const count = () => {
+      
+      //       for (var i = 0 ; i <  add?.length;i++){
+        //         product = product + add[i].cantidad
+        
+        
+        //       }}
+        // setTimeout(
+          //     count, 5000
+          // )
+          
+          
+        }
+        
+        
+        var product = 0
+        useEffect(() => {
+          
+   
+
+          for (var i = 0 ; i <  add?.length;i++){
+            product = product + add[i].cantidad
+            
+            
+          }
+          
+          setProductos(product)
+          setCanti(product)
+          console.log(productos)
+          return () => {
+            canti
+          }
+        },[add])
+  
   return (
     <>
       {loading ? (
@@ -150,27 +189,8 @@ export default function Home() {
               <button
                 className="avo-price"
                 onClick={() => {
-                 
-                  const search =  add.find(
-                    (element) => (element?.product?.id === avo?.id)
-                  );
-                
-              
-                  (
-                  search == undefined ? 
-                  setAdd([
-                    ...add,
-                    {
-                      
-                        product: avo,
-                        
-                      
-                    }
-                  ]) :
-              
-                  search.product.cantidad = producList[producList.indexOf(avo)].cantidad > 1 ? avo.cantidad : 0);
-              
-                  
+
+                  add3(avo)
                 }}
               >
                 add
