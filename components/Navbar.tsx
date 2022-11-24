@@ -8,7 +8,7 @@ import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
 import Link from "next/link";
 import { useProduct } from "context/Produtcs";
-import { useCantidad } from "context/cantdad";
+import { useCantidad } from "context/Cantdad";
 import { useProductsList } from "context/ProdutcsList";
 
 const Navbar = () => {
