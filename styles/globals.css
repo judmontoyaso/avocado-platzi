@@ -92,9 +92,20 @@ body {
 a{
   text-decoration: none!important;
 }
-
+.contenedor-venta{
+  display: flex;
+  align-content: center;
+  align-items: center;
+  width: 60%;
+  justify-content: space-around;
+}
 .navbar{
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: white;
+  z-index: 999999;
 }
 
 .p-inputtext:enabled:focus {

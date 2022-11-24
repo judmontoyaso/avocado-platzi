@@ -115,7 +115,7 @@ export default function Home() {
       ) : (
         <div className="contenedor-cards">
           {producList.map((avo) => (
-            <div>
+            <div key={producto?.id}>
               <div className="card-avo">
                 <Link key={avo.id} href={`product/${avo.id}`}>
                   <div>
