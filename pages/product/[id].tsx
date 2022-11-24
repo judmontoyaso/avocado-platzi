@@ -3,12 +3,16 @@ import { useRouter } from "next/router";
 import data from "../../database/data";
 import Image from "next/image";
 import ReactLoading from "react-loading";
-
+import { useProduct } from "context/Produtcs";
 
 const ProductItem = () => {
   const {
     query: { id },
   } = useRouter();
+
+  const [context, setContext] = useProduct();
+
+  console.log(context);
 
   const [product, setProduct] = useState({
     name: "",
@@ -21,9 +25,6 @@ const ProductItem = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const [count, setCount] = useState(0);
-
-
   useEffect(() => {
     window
       .fetch(`/api/avo/${id}`)
@@ -35,16 +36,16 @@ const ProductItem = () => {
   }, [id]);
   console.log(data);
 
-  const sum = function () {
-    setCount(count + 1);
-  };
-  const rest = function () {
-    !(count < 1) ? setCount(count - 1) : setCount(0);
-  };
+  // const sum = function () {
+  //   setCount(count + 1);
+  // };
+  // const rest = function () {
+  //   !(count < 1) ? setCount(count - 1) : setCount(0);
+  // };
 
-  const add = function () {
-    setProdtbuy([]);
-  };
+  // const add = function () {
+  //   setProdtbuy([]);
+  // };
   return (
     <>
       {loading ? (
@@ -74,12 +75,12 @@ const ProductItem = () => {
                 <div>{product?.sku}</div>
                 <div>$ {product?.price}</div>
                 <div>
-                  <div>
+                  {/* <div>
                     <input value={count}></input>{" "}
                     <button onClick={sum}>Add</button>
                     <button onClick={rest}>rest</button>
                     <button onClick={add}>rest</button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

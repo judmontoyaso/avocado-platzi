@@ -7,8 +7,12 @@ import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
 import Link from "next/link";
+import { useProduct } from "context/Produtcs";
 
 const Navbar = () => {
+
+  const[context, setContext] = useProduct();
+
   const end = (
     <Link href={"/about"}>
       <div className="button-demo">
@@ -16,6 +20,8 @@ const Navbar = () => {
           <Button className="vimeo p-0" aria-label="Vimeo">
             <i className="pi pi-shopping-cart px-2"></i>
             <span className="px-3">Canasta</span>
+          <div className="px-3 number">({context?.length})</div>
+      
           </Button>
         </div>
       </div>

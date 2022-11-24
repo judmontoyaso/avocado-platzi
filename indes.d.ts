@@ -16,6 +16,8 @@ type TProductAttributes = {
   taste: string
 }
 
+
+
 type TProduct = {
   id: TProductId
   name: string
@@ -31,4 +33,12 @@ type TAPIAvoResponse = {
   length: number
   data: TProduct[]
   error?: string
+}
+type productContext ={
+
+  producto:{
+
+    product: TProduct
+    cantidad : number
+  }
 }
