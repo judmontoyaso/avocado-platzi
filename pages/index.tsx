@@ -8,60 +8,48 @@ import { MouseEventHandler, useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 
 export default function Home() {
+  const [contextList, setContextList] = useProductsList();
+  console.log(contextList);
 
-const [contextList, setContextList] = useProductsList()
-console.log(contextList)
+  const [producList, setProducList] = useState([
+    {
+      name: "",
+      price: 0,
+      image: "",
+      id: "",
+      sku: "",
+      attributes: { description: "", taste: "", hardiness: "", shape: "" },
+      cantidad: 0,
+    },
+  ]);
 
-const [producList, setProducList] = useState([
-  {
-    name: "",
-    price: 0,
-    image: "",
-    id: "",
-    sku: "",
-    attributes: { description: "", taste: "", hardiness: "", shape: "" },
-    cantidad: 0,
-  },
-]);
-  
   useEffect(() => {
-
     window
-    .fetch("/api/avo")
-    .then((response) => response.json())
-    .then(({ data, legth }) => {
-      contextList.length != 1 ? 
-      setProducList(contextList):
-      setContextList(data);
-      setLoading(false)});
-      
-      
-      setProducList(contextList)
-    },[]);
-  
+      .fetch("/api/avo")
+      .then((response) => response.json())
+      .then(({ data, legth }) => {
+        contextList.length != 1
+          ? setProducList(contextList)
+          : setContextList(data);
+        setLoading(false);
+      });
 
-  
+    setProducList(contextList);
+  }, []);
 
-
-  
-  
   const [loading, setLoading] = useState(true);
-  
+
   const add2: productContext[] = [];
   const [add, setAdd] = useState<productContext[]>([]);
 
   const [context, setContext] = useProduct();
-  
+
   const [sum, setSum] = useState(1);
   const [rest, setRest] = useState([{}]);
-  
 
- 
+  const [productos, setProductos] = useState(0);
 
-  
-  const [productos, setProductos] = useState(0)
-
-const [canti, setCanti] = useCantidad()
+  const [canti, setCanti] = useCantidad();
   const op = (i) => {
     producList[i].cantidad =
       producList[i].cantidad == undefined ? 1 : producList[i].cantidad + 1;
@@ -76,54 +64,44 @@ const [canti, setCanti] = useCantidad()
         : producList[i].cantidad == 0
         ? 0
         : producList[i].cantidad - 1;
-
   };
 
-  const add3 = (avo) =>{
-    const search =  add.find(
-      (element) => (element?.product?.id === avo?.id)
-    );
+  const add3 = (avo) => {
+    const search = add.find((element) => element?.product?.id === avo?.id);
 
+    search == undefined
+      ? setAdd([
+          ...add,
+          {
+            product: avo,
+            cantidad: producList[producList.indexOf(avo)]?.cantidad,
+          },
+        ])
+      : (search.cantidad =
+          producList[producList.indexOf(avo)]?.cantidad > 1 ? avo.cantidad : 0);
+  };
 
-    (
-    search == undefined ?
-    setAdd([
-      ...add,
-      {
+  var product = 0;
+  useEffect(() => {
+    setContext(add);
 
-          product: avo,
-          cantidad: producList[producList.indexOf(avo)]?.cantidad
+    for (var i = 0; i < add?.length; i++) {
+      product = product + add[i].cantidad;
+    }
 
-      }
-    ]) :
+    setProductos(product);
+    setCanti(product);
 
-    search.cantidad = producList[producList.indexOf(avo)]?.cantidad > 1 ? avo.cantidad : 0);
+    return () => {
+      canti;
+    };
+  }, [add]);
 
-        }
-        
-        
-        var product = 0
-        useEffect(() => {
-          
-          setContext(add)
-   
-
-          for (var i = 0 ; i <  add?.length;i++){
-            product = product + add[i].cantidad
-            
-            
-          }
-          
-          setProductos(product)
-          setCanti(product)
-
-          return () => {
-            canti
-          }
-        },[add])
-  
   return (
-    <>
+    <div className="contenedor">
+      <div>
+        <h2>Platzi Avo</h2>
+      </div>
       {loading ? (
         <div className="container-loading">
           {" "}
@@ -138,8 +116,8 @@ const [canti, setCanti] = useCantidad()
         <div className="contenedor-cards">
           {producList.map((avo) => (
             <div>
-              <Link key={avo.id} href={`product/${avo.id}`}>
-                <div className="card-avo">
+              <div className="card-avo">
+                <Link key={avo.id} href={`product/${avo.id}`}>
                   <div>
                     <div className="image-card-avo">
                       <Image
@@ -151,41 +129,55 @@ const [canti, setCanti] = useCantidad()
                     </div>
                   </div>
                   <div className="avo-name">{avo.name}</div>
-                  <div className="avo-price">{avo.price}</div>
+                  <div className="avo-price">{`$ ${avo.price}`}</div>
+                </Link>
+                <div className="hr">
+                  <hr></hr>
                 </div>
-              </Link>
-              <input
-                value={producList[producList.indexOf(avo)].cantidad}
-              ></input>
-              <button
-                className="avo-price"
-                onClick={() => {
-                  op(producList.indexOf(avo));
-                }}
-              >
-                +
-              </button>
-              <button
-                className="avo-price"
-                onClick={() => {
-                  opres(producList.indexOf(avo));
-                }}
-              >
-                -
-              </button>
-              <button
-                className="avo-price"
-                onClick={() => {
-
-                  add3(avo)
-                }}
-              >
-                add
-              </button>
+                <div className="inputcontainer">
+                  <div className="insmall">
+                    <button
+                      className="avo-price sum"
+                      onClick={() => {
+                        op(producList.indexOf(avo));
+                      }}
+                    >
+                      <i className="pi pi-caret-up px-2"></i>
+                    </button>
+                    <input
+                      className="inputcantidad"
+                      disabled
+                      value={
+                        producList[producList.indexOf(avo)].cantidad > 0
+                          ? producList[producList.indexOf(avo)].cantidad
+                          : "-"
+                      }
+                    ></input>
+                    <button
+                      className="avo-price sum"
+                      onClick={() => {
+                        opres(producList.indexOf(avo));
+                      }}
+                    >
+                      <i className="pi pi-caret-down px-2"></i>
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      className=" boton-add"
+                      onClick={() => {
+                        add3(avo);
+                      }}
+                    >
+                      Comprar
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 }

@@ -113,12 +113,21 @@ a{
 justify-content: space-between!important;
 padding: 5px 3rem;
 }
+.contenedor{
+  text-align: center;
+  text-align: -webkit-center;
+
+  margin-top: 100px;
+
+}
 
 .contenedor-cards{
   display: flex;
   flex-direction: row;
 flex-wrap:wrap ;
 justify-content: center;
+width: 80%;
+text-align: center;
 }
 
 .contenedor-producto{
@@ -157,8 +166,8 @@ justify-content: center;
 
 .card-avo:hover{
  
-  transform: scale(1.01);
-  transition: all 500ms;
+  transform: scale(1.005);
+  transition: all 50ms;
   background-image: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255)), linear-gradient(to right, rgb(235, 245, 238), rgba(31, 95, 18, 0.411));
 }
 
@@ -197,4 +206,81 @@ justify-content: center;
 
 .number{
   font-weight: 600;
+}
+
+.inputcantidad{
+  width: 40px;
+  border: none;
+  text-align: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(31, 95, 18, 0.911);
+  background-color: white;
+}
+
+.sum{
+  border: none;
+  background-color: white;
+  color: none;
+  cursor: pointer;
+}
+
+.inputcontainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  padding:10px;
+}
+
+.boton-add{
+  border:solid 1px rgba(31, 95, 18, 0.911);
+  background-color: white;
+  border-radius: 8px;
+  color: rgba(31, 95, 18, 0.911);
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0 7px 0 15px;
+  padding: 10px;
+}
+
+.avo-name{
+  font-weight: 600;
+  color: black;
+  transition: none!important;
+  transform: none!important;
+  text-decoration: none!important;
+  text-align: center;
+  margin-top: 10px;
+}
+.avo-price{
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.678);
+  text-align: center;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+.hr hr{
+  border-color: rgba(0, 0, 0, 0.205);
+  width: 80%;
+  text-align: center;
+}
+
+.insmall{
+  padding-top: 8px;
+}
+
+.enlacecentral{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+}
+
+.titulo{
+  color: #44835b;
+  font-weight: 600;
+  font-size: 18px;
 }
