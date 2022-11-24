@@ -8,13 +8,13 @@ import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
 import Link from "next/link";
 import { useProduct } from "context/Produtcs";
-import { useCantidad } from "context/Cantdad";
+
 import { useProductsList } from "context/ProdutcsList";
 
 const Navbar = () => {
   const [context, setContext] = useProduct();
   const [productos, setProductos] = useState(0);
-  const [cantidad, setcantidad] = useCantidad();
+ 
   const [lista, setLista] = useProductsList();
 
   console.log(lista);
