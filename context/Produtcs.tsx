@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 
 
-export const ProductContext = createContext([{...{
+export const ProductContext = createContext<any[]>([{...{
  product:{ name: "",
  price: 0,
  sku: "",
