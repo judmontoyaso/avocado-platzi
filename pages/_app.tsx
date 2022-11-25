@@ -2,7 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Layout from '@components/Layout'
 import { ProductContext } from "../context/Produtcs";
-import { cantidadContext } from "../context/cantdad";
+import { cantidadContext } from "../context/Cantdad";
 import { ProductsListContext } from "../context/ProdutcsList";
 
 

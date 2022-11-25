@@ -50,14 +50,14 @@ export default function Home() {
   const [productos, setProductos] = useState(0);
 
   const [canti, setCanti] = useCantidad();
-  const op = (i:any) => {
+  const op = (i: any) => {
     producList[i].cantidad =
       producList[i].cantidad == undefined ? 1 : producList[i].cantidad + 1;
 
     setSum(sum + 1);
   };
 
-  const opres = (i:any) => {
+  const opres = (i: any) => {
     producList[i].cantidad =
       !producList[i].cantidad == undefined
         ? 0
@@ -66,7 +66,7 @@ export default function Home() {
         : producList[i].cantidad - 1;
   };
 
-  const add3 = (avo:any) => {
+  const add3 = (avo: any) => {
     const search = add.find((element) => element?.product?.id === avo?.id);
 
     search == undefined
@@ -90,7 +90,6 @@ export default function Home() {
     }
 
     setProductos(product);
-    setCanti(product);
 
     return () => {
       canti;
