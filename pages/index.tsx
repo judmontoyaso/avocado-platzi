@@ -8,7 +8,7 @@ import Link from "next/link";
 import { MouseEventHandler, useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 
-export const getServerSideProps = async (params) => {
+export const getServerSideProps = async (params: TProduct) => {
  const response = await fetch("https://avocado-platzi-judmontoyaso.vercel.app/api/avo")
  const {data  : productList}= await response.json()
 
