@@ -7,18 +7,12 @@ import { ProductsListContext } from "../context/ProdutcsList";
 
 import { useReducer, useState } from "react";
 
+
+
 export default function App({ Component, pageProps }: AppProps) {
-  const [add, setAdd] = useState({
-    product: {
-      name: "",
-      price: 0,
-      sku: "",
-      image: "",
-      id: "",
-      attributes: { description: "", taste: "", hardiness: "", shape: "" },
-    },
-    cantidad: 0,
-  });
+
+  
+  const [add, setAdd] = useState<any>();
   const [cantidad, setCantidad] = useState(0);
   const [productos, setproductos] = useState([{}]);
 
