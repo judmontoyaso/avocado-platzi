@@ -8,7 +8,7 @@ import Link from "next/link";
 import { MouseEventHandler, useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 
-export const getServerSideProps = async (params: TProduct) => {
+export const getServerSideProps = async (params: any) => {
  const response = await fetch("https://avocado-platzi-judmontoyaso.vercel.app/api/avo")
  const {data  : productList}= await response.json()
 
@@ -21,7 +21,7 @@ productList,
 }
 
 
-export default function Home({productList} : {productList :TProduct[]}) {
+export default function Home({productList} : {productList : any}) {
   const [contextList, setContextList] = useProductsList();
 
   const [producList, setProducList] = useState<any>();
@@ -114,7 +114,7 @@ export default function Home({productList} : {productList :TProduct[]}) {
         </div>
       ) : (
         <div className="contenedor-cards">
-          {producList?.map((avo) => (
+          {producList?.map((avo: any) => (
             <div key={avo.id}>
               <div className="card-avo">
                 <Link key={avo.id} href={`product/${avo.id}`}>
