@@ -1,4 +1,4 @@
-import { useCantidad } from "context/cantdad";
+
 import { useProduct } from "context/Produtcs";
 import { useProductsList } from "context/ProdutcsList";
 import Head from "next/head";
@@ -49,7 +49,7 @@ export default function Home() {
 
   const [productos, setProductos] = useState(0);
 
-  const [canti, setCanti] = useCantidad();
+
   const op = (i: any) => {
     producList[i].cantidad =
       producList[i].cantidad == undefined ? 1 : producList[i].cantidad + 1;
@@ -91,9 +91,7 @@ export default function Home() {
 
     setProductos(product);
 
-    return () => {
-      canti;
-    };
+
   }, [add]);
 
   return (
