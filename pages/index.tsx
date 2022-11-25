@@ -1,48 +1,51 @@
 
 import { useProduct } from "context/Produtcs";
 import { useProductsList } from "context/ProdutcsList";
+import fetch from 'isomorphic-unfetch'
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { MouseEventHandler, useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 
-export default function Home() {
+export const getServerSideProps = async (params) => {
+ const response = await fetch("https://avocado-platzi-judmontoyaso.vercel.app/api/avo")
+ const {data  : productList}= await response.json()
+
+ return{
+  props : {
+productList,
+  }
+ }
+
+}
+
+
+export default function Home({productList} : {productList :TProduct[]}) {
   const [contextList, setContextList] = useProductsList();
-  console.log(contextList);
 
-  const [producList, setProducList] = useState([
-    {
-      name: "",
-      price: 0,
-      image: "",
-      id: "",
-      sku: "",
-      attributes: { description: "", taste: "", hardiness: "", shape: "" },
-      cantidad: 0,
-    },
-  ]);
-
-  useEffect(() => {
-    window
-      .fetch("/api/avo")
-      .then((response) => response.json())
-      .then(({ data, legth }) => {
-        contextList.length != 1
-          ? setProducList(contextList)
-          : setContextList(data);
-        setLoading(false);
-      });
-
-    setProducList(contextList);
-  }, []);
-
+  const [producList, setProducList] = useState<any>();
   const [loading, setLoading] = useState(true);
 
+  
+
+  
+  
   const add2: productContext[] = [];
   const [add, setAdd] = useState<productContext[]>([]);
-
+  
   const [context, setContext] = useProduct();
+
+  useEffect(() => {
+    
+    contextList.length != 1
+    ? setProducList(contextList)
+    : setContextList(productList);
+  setLoading(false);
+});
+
+
+
 
   const [sum, setSum] = useState(1);
   const [rest, setRest] = useState([{}]);
@@ -111,7 +114,7 @@ export default function Home() {
         </div>
       ) : (
         <div className="contenedor-cards">
-          {producList.map((avo) => (
+          {producList?.map((avo) => (
             <div key={avo.id}>
               <div className="card-avo">
                 <Link key={avo.id} href={`product/${avo.id}`}>
