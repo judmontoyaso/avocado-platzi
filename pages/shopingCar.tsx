@@ -18,6 +18,7 @@ const ShopingCar = () => {
                 height={100}
                 src={producto?.cantidad > 0 ? producto?.image : ""}
                 hidden={producto?.cantidad > 0 ? false : true}
+                alt='imagen'
               ></Image>
             </div>
             <div>{producto?.cantidad > 0 ? producto?.name : ""}</div>
