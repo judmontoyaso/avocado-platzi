@@ -9,7 +9,7 @@ const ShopingCar = () => {
 
   return (
     <div className="contenedor">
-      {lista?.map((producto) => (
+      {lista?.map((producto :any) => (
         <>
           <div key={producto?.id} className="contenedor-venta">
             <div>
